@@ -48,12 +48,10 @@ Labs:
 
 
 
-#Translation codes:
-1. Lab: Google Cloud Fundamentals: Getting started with compute engine.
+##Translation codes:
+##Lab: Google Cloud Fundamentals: Getting started with compute engine.
          
- # Lab: Google Cloud Fundamentals: Getting started with compute engine.
-
-#Objectives:
+##Objectives:
 Create a Compute Engine virtual machine using the Google Cloud Platform (GCP) Console.
 
 Create a Compute Engine virtual machine using the gcloud command-line interface.
@@ -61,123 +59,123 @@ Create a Compute Engine virtual machine using the gcloud command-line interface.
 Connect between the two instances.
 
 #Tasks:
-1. Create a Compute Engine virtual machine using the Google Cloud Platform (GCP) Console.
+Step 1. Create a Compute Engine virtual machine using the Google Cloud Platform (GCP) Console.
 
    gcloud compute instances create "my-vm-2" --machine-type "n1-standard-1" --image-project "debian-cloud" --image "debian-9-stretch-v20190213" --subnet "default" --tags http
 
-2. Create a Compute Engine virtual machine using the gcloud command-line interface.
+Step 2. Create a Compute Engine virtual machine using the gcloud command-line interface.
 
    gcloud config set compute/zone us-central1-b
    gcloud compute instances create "my-vm-2" --machine-type "n1-standard-1" --image-project "debian-cloud" --image "debian-9-stretch-v20190213" --subnet "default"
 
-3.Connect between the two instances.
+Step 3.Connect between the two instances.
 
--Use the ping command to confirm that my-vm-2 can reach my-vm-1 over the network.
+Use the ping command to confirm that my-vm-2 can reach my-vm-1 over the network.
 
    Connect to my-vm-2 using ssh
      gcloud compute ssh my-vm-2
    run ping to test connection to my-vm-1
      ping my-vm-1
 
--Use the ssh command to open a command prompt on my-vm-1
+Use the ssh command to open a command prompt on my-vm-1
    ssh my-vm-1
      install the Nginx web server
      sudo apt-get install nginx-light -y
 
--Use the nano text editor to add a custom message to the home page of the web server:
+Use the nano text editor to add a custom message to the home page of the web server:
      sudo nano /var/www/html/index.nginx-debian.html
 
--Add text like this, and replace YOUR_NAME with your name:
+Add text like this, and replace YOUR_NAME with your name:
     Hi from YOUR_NAME
 
--Confirm that the web server is serving your new page. At the command prompt on my-vm-1, execute this command:
+Confirm that the web server is serving your new page. At the command prompt on my-vm-1, execute this command:
  
     curl http://localhost/
 
--To exit the command prompt on my-vm-1, execute this command.
+To exit the command prompt on my-vm-1, execute this command.
     exit
 
--To confirm that my-vm-2 can reach the web server on my-vm-1, at the command prompt on my-vm-2, execute this command:
+To confirm that my-vm-2 can reach the web server on my-vm-1, at the command prompt on my-vm-2, execute this command:
  
      curl http://my-vm-1/
 
--Get external IP for my-vm-1
+Get external IP for my-vm-1
  
      gcloud compute instances list
 
--copy and paste my-vm-1 external IP to a web browser address bar
--you will see your web server's home page, including your custom text.
+copy and paste my-vm-1 external IP to a web browser address bar
+you will see your web server's home page, including your custom text.
 
    
- 
+ ###################################################################################################################################################################
 
 
-
- 2. Lab: Google Cloud Fundamentals: Getting Started with GKE
+##Lab2: Google Cloud Fundamentals: Getting Started with GKE
     
-#Google Cloud Fundamentals: Getting Started with GKE
+##Google Cloud Fundamentals: Getting Started with GKE
 
-#Objectives
+##Objectives
 Provision a Kubernetes cluster using Kubernetes Engine.
 
 Deploy and manage Docker containers using kubectl.
 
 
-
 #Tasks
-1. Confirm that needed APIs are enabled Kubernetes Engine API and Container Registry API
+Step 1. Confirm that needed APIs are enabled Kubernetes Engine API and Container Registry API
 
-    -Enter following to display project ID
+    Enter following to display project ID
        gcloud projects list
 
-    -Set default project ID to one you want to enable APIs
+    Set default project ID to one you want to enable APIs
        gcloud config set project YOUR_PROJECT_ID
 
-    -Get a list of services you can enable in your project
+    Get a list of services you can enable in your project
        gcloud services list --available
 
-    -If you dont see the API listed run following command
+    If you dont see the API listed run following command
         gcloud services enable Kubernetes Engine API
         gcloud services enable Container Registry API
 
-2. Start a Kubernetes Engine cluster
+Step 2. Start a Kubernetes Engine cluster
 
-    -set the zone your project is in to a variable called MY_ZONE
+    set the zone your project is in to a variable called MY_ZONE
         export MY_ZONE=us-central1-a
 
-    -Start a Kubernetes cluster managed by Kubernetes Engine. Name the cluster webfrontend and configure it to run 2 nodes:
+    Start a Kubernetes cluster managed by Kubernetes Engine. Name the cluster webfrontend and configure it to run 2 nodes:
         gcloud container clusters create webfrontend --zone $MY_ZONE --num-nodes 2
 
-    -After the cluster is created, check your installed version of Kubernetes using the kubectl version command
+    After the cluster is created, check your installed version of Kubernetes using the kubectl version command
         kubectl version
 
-    -View your running nodes
+    View your running nodes
         gcloud compute instances list
 
-3. Run and deploy a container
-    -launch a single instance of the nginx container.
+Step 3. Run and deploy a container
+
+    launch a single instance of the nginx container.
         kubectl create deploy nginx --image=nginx:1.17.10
 
-    -View the pod running the nginx container.
+    View the pod running the nginx container.
         kubectl get pods
 
-    -Expose the nginx container to the Internet
+    Expose the nginx container to the Internet
         kubectl expose deployment nginx --port 80 --type LoadBalancer
 
-    -View the new service
+    View the new service
         kubectl get services
 
-    -Open a new web browser tab and paste your cluster's external IP address into the address bar. The default home page of the Nginx browser is displayed
-    -Scale up the number of pods running on your service
+    Open a new web browser tab and paste your cluster's external IP address into the address bar. The default home page of the Nginx browser is displayed
+    
+    Scale up the number of pods running on your service
         kubectl scale deployment nginx --replicas 3
 
-    -Confirm that Kubernetes has updated the number of pods
+    Confirm that Kubernetes has updated the number of pods
         kubectl get pods
 
-    -Confirm that your external IP address has not changed
+    Confirm that your external IP address has not changed
         kubectl get services
       
-    -Return to the web browser tab in which you viewed your cluster's external IP address. Refresh the page to confirm that the nginx web server is still responding.
+    Return to the web browser tab in which you viewed your cluster's external IP address. Refresh the page to confirm that the nginx web server is still     responding.
 
 
 
