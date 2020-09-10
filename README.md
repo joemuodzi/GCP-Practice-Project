@@ -49,8 +49,9 @@ Labs:
 
 
 ##Translation codes:
-##Lab: Google Cloud Fundamentals: Getting started with compute engine.
-         
+
+## Lab: Google Cloud Fundamentals: Getting started with compute engine.
+
 ##Objectives:
 Create a Compute Engine virtual machine using the Google Cloud Platform (GCP) Console.
 
@@ -68,7 +69,7 @@ Step 2. Create a Compute Engine virtual machine using the gcloud command-line in
    gcloud config set compute/zone us-central1-b
    gcloud compute instances create "my-vm-2" --machine-type "n1-standard-1" --image-project "debian-cloud" --image "debian-9-stretch-v20190213" --subnet "default"
 
-Step 3.Connect between the two instances.
+Step 3. Connect between the two instances.
 
 Use the ping command to confirm that my-vm-2 can reach my-vm-1 over the network.
 
@@ -105,6 +106,11 @@ Get external IP for my-vm-1
 
 copy and paste my-vm-1 external IP to a web browser address bar
 you will see your web server's home page, including your custom text.
+
+
+
+
+
 
    
  ###################################################################################################################################################################
